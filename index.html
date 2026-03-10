@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Multi User Time Tracker</title>
+<title>Stopwatch and Timer App</title>
 
 <style>
 
@@ -45,9 +45,26 @@ margin:5px;
 
 <body>
 
-<h1>Multi User Stopwatch & Timer</h1>
+<h1>Stopwatch and Timer</h1>
 
 <div class="container">
+
+<!-- TIMER (Independent) -->
+
+<h2>Timer</h2>
+
+<input type="number" id="timerMinutes" placeholder="Enter minutes">
+
+<h2 id="timerDisplay">00:00</h2>
+
+<button onclick="startTimer()">Start Timer</button>
+<button onclick="deleteTimer()">Delete Timer</button>
+
+<hr>
+
+<!-- ADD USER -->
+
+<h2>Add User Stopwatch</h2>
 
 <input type="text" id="username" placeholder="Enter user name">
 <button onclick="addUser()">Add User</button>
