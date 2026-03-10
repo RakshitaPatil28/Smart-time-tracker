@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Smart Time Tracker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<h1>Smart Time Tracker</h1>
+
+<div class="container">
+
+<input type="text" id="username" placeholder="Enter your name">
+<button onclick="saveUser()">Save</button>
+
+<h3 id="userDisplay"></h3>
+
+<hr>
+
+<h2>Stopwatch</h2>
+
+<h2 id="stopwatch">00:00:00</h2>
+
+<button onclick="startStopwatch()">Start</button>
+<button onclick="stopStopwatch()">Stop</button>
+<button onclick="resetStopwatch()">Reset</button>
+
+<hr>
+
+<h2>Create Timer</h2>
+
+<input type="number" id="minutes" placeholder="Minutes">
+<button onclick="createTimer()">Add Timer</button>
+
+<div id="timerList"></div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
