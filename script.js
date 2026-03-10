@@ -1,3 +1,49 @@
+/* TIMER */
+
+let timerInterval;
+
+function startTimer(){
+
+let minutes=document.getElementById("timerMinutes").value;
+
+if(minutes===""){
+alert("Enter minutes");
+return;
+}
+
+let total=minutes*60;
+
+timerInterval=setInterval(function(){
+
+let m=Math.floor(total/60);
+let s=total%60;
+
+document.getElementById("timerDisplay").innerText=
+`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+
+total--;
+
+if(total<0){
+clearInterval(timerInterval);
+document.getElementById("timerDisplay").innerText="Finished!";
+}
+
+},1000);
+
+}
+
+function deleteTimer(){
+
+clearInterval(timerInterval);
+
+document.getElementById("timerDisplay").innerText="00:00";
+
+document.getElementById("timerMinutes").value="";
+
+}
+
+/* USER STOPWATCH */
+
 function addUser(){
 
 let name=document.getElementById("username").value;
@@ -13,10 +59,8 @@ userDiv.className="userBox";
 let title=document.createElement("h3");
 title.innerText=name;
 
-/* STOPWATCH */
-
-let swDisplay=document.createElement("h2");
-swDisplay.innerText="00:00:00";
+let display=document.createElement("h2");
+display.innerText="00:00:00";
 
 let startBtn=document.createElement("button");
 startBtn.innerText="Start";
@@ -27,33 +71,15 @@ stopBtn.innerText="Stop";
 let resetBtn=document.createElement("button");
 resetBtn.innerText="Reset";
 
-/* TIMER */
-
-let timerInput=document.createElement("input");
-timerInput.placeholder="Minutes";
-
-let timerDisplay=document.createElement("h3");
-timerDisplay.innerText="00:00";
-
-let timerBtn=document.createElement("button");
-timerBtn.innerText="Start Timer";
-
-let deleteTimerBtn=document.createElement("button");
-deleteTimerBtn.innerText="Delete Timer";
-
-/* DELETE USER */
-
-let deleteUser=document.createElement("button");
-deleteUser.innerText="Delete User";
-
-/* STOPWATCH VARIABLES */
+let deleteBtn=document.createElement("button");
+deleteBtn.innerText="Delete User";
 
 let seconds=0;
 let minutes=0;
 let hours=0;
-let swInterval;
+let interval;
 
-function updateStopwatch(){
+function update(){
 
 seconds++;
 
@@ -67,92 +93,38 @@ minutes=0;
 hours++;
 }
 
-swDisplay.innerText =
+display.innerText=
 `${String(hours).padStart(2,'0')}:${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
 
 }
 
 startBtn.onclick=function(){
-swInterval=setInterval(updateStopwatch,1000);
+interval=setInterval(update,1000);
 }
 
 stopBtn.onclick=function(){
-clearInterval(swInterval);
+clearInterval(interval);
 }
 
 resetBtn.onclick=function(){
-clearInterval(swInterval);
+clearInterval(interval);
 seconds=0;
 minutes=0;
 hours=0;
-swDisplay.innerText="00:00:00";
+display.innerText="00:00:00";
 }
 
-/* TIMER */
-
-let timerInterval;
-
-timerBtn.onclick=function(){
-
-let total=timerInput.value*60;
-
-if(total<=0){
-alert("Enter minutes");
-return;
-}
-
-timerInterval=setInterval(function(){
-
-let m=Math.floor(total/60);
-let s=total%60;
-
-timerDisplay.innerText=
-`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-
-total--;
-
-if(total<0){
-clearInterval(timerInterval);
-timerDisplay.innerText="Finished!";
-}
-
-},1000);
-
-}
-
-deleteTimerBtn.onclick=function(){
-clearInterval(timerInterval);
-timerDisplay.innerText="00:00";
-timerInput.value="";
-}
-
-/* DELETE USER */
-
-deleteUser.onclick=function(){
-clearInterval(swInterval);
-clearInterval(timerInterval);
+deleteBtn.onclick=function(){
+clearInterval(interval);
 userDiv.remove();
 }
 
-/* ADD ELEMENTS */
-
 userDiv.appendChild(title);
-
-userDiv.appendChild(swDisplay);
+userDiv.appendChild(display);
 userDiv.appendChild(startBtn);
 userDiv.appendChild(stopBtn);
 userDiv.appendChild(resetBtn);
-
-userDiv.appendChild(document.createElement("hr"));
-
-userDiv.appendChild(timerInput);
-userDiv.appendChild(timerDisplay);
-userDiv.appendChild(timerBtn);
-userDiv.appendChild(deleteTimerBtn);
-
-userDiv.appendChild(document.createElement("br"));
-
-userDiv.appendChild(deleteUser);
+userDiv.appendChild(deleteBtn);
 
 document.getElementById("userList").appendChild(userDiv);
 
